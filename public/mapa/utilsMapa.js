@@ -11,6 +11,8 @@ export async function obtenerClientes(){
 export function agruparClientes(data){
   const grouped = {};
 
+  console.log(data)
+
   data.forEach(item =>{
    if (!item.COORDENADAS) return;
    const key = item.COORDENADAS;
@@ -20,13 +22,17 @@ export function agruparClientes(data){
       coords: key,
       clientes: [],
       contratos: [],
-      nameClients: [],
+      nameClients: [], 
+      direcciones: [],
+      colonias: []     
      };
    }
 
    grouped[key].clientes.push(item.NO);
    grouped[key].contratos.push(item.CONTRATO);
-   grouped[key].nameClients.push(item.NOMBRE);
+   grouped[key].nameClients.push(item.NOMBRE);   
+   grouped[key].direcciones.push(item.DIRECCION);       
+   grouped[key].colonias.push(item.COLONIA);       
   });
 
  return grouped;
@@ -38,14 +44,16 @@ const markers = {};
 /* PINTAR LOS MARCADORES */
 export function pintarMarcadores(map, grouped){
   Object.values(grouped).forEach(grupo =>{
-    const [lat, lng] = grupo.coords.split(',').map(Number);
-
+    const [lat, lng] = grupo.coords.split(',').map(Number);    
+    
     const marker = L.marker([lat, lng]).addTo(map);
      marker.bindPopup(`
        <div class="recuadro">       
          <span class="no-cliente"><b>${grupo.clientes}</b></span><br>
-         <span class="names">${grupo.nameClients}</span><br> 
-         <span class="coords"> ${lat}, ${lng} </span><br> 
+         <span class="names">${grupo.nameClients}</span><br> <br>  
+         <hr>           
+         <span class="coords"> ${grupo.direcciones[0]} </span><br>              
+         <b><span class="coords"> ${grupo.colonias[0]} </span><br><b>             
            <div class="controls">
             <button class="btn btn-maps">Navegar</button> 
            <button class="btn marcar-visitado" value="${grupo.contratos}">Visitado</button> 
@@ -110,3 +118,6 @@ export function actualizarUbicacion(map, lat, lng){
     userMarker.setLatLng([lat, lng]); // 🔥 solo se mueve
   }
 }
+
+
+{/* <span class="coords"> ${lat}, ${lng} </span><br>  */}
