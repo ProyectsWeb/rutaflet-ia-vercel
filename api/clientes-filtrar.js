@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     );
 
     const [rows] = await db.execute(
-      `SELECT NO, CONTRATO, NOMBRE, DIRECCION, COLONIA, COORDENADAS, visitado 
+      `SELECT NO, CONTRATO, NOMBRE, DIRECCION, COLONIA, PERIODO, COORDENADAS, visitado 
        FROM ubicaciones WHERE CONTRATO IN (${placeholders})`,
       contratos
     );

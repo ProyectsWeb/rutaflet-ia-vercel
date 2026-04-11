@@ -24,7 +24,8 @@ export function agruparClientes(data){
       contratos: [],
       nameClients: [], 
       direcciones: [],
-      colonias: []     
+      colonias: [],
+      periodos: []     
      };
    }
 
@@ -33,6 +34,7 @@ export function agruparClientes(data){
    grouped[key].nameClients.push(item.NOMBRE);   
    grouped[key].direcciones.push(item.DIRECCION);       
    grouped[key].colonias.push(item.COLONIA);       
+   grouped[key].periodos.push(item.PERIODO);       
   });
 
  return grouped;
@@ -49,7 +51,10 @@ export function pintarMarcadores(map, grouped){
     const marker = L.marker([lat, lng]).addTo(map);
      marker.bindPopup(`
        <div class="recuadro">       
-         <span class="no-cliente"><b>${grupo.clientes}</b></span><br>
+          <div class="frecuencia"> 
+            <span class="no-cliente"><b>${grupo.clientes}</b></span>
+            <span class="periodos"><b>${grupo.periodos[0]}</b></span><br>
+          </div>
          <span class="names">${grupo.nameClients}</span><br> <br>  
          <hr>           
          <span class="coords"> ${grupo.direcciones[0]} </span><br>              

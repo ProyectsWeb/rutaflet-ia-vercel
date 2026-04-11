@@ -71,6 +71,16 @@
 .btn-controls{  
   width: 40%;
   display: flex;
-  justify-content: space-around;
- 
+  justify-content: space-around; 
+}
+
+
+.frecuencia{  
+  display: flex;
+  justify-content:space-between;
+}
+.periodos{
+  width: 100%; 
+  text-align: end;
+  margin-left: 0.5rem;
 }

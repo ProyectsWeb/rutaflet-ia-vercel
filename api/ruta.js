@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   try {
     const [rows] = await db.execute(
-      `SELECT NO, CONTRATO, NOMBRE, DIRECCION, COLONIA, COORDENADAS 
+      `SELECT NO, CONTRATO, NOMBRE, DIRECCION, COLONIA, PERIODO, COORDENADAS 
        FROM ubicaciones WHERE visitado = 0`
     );
 
